@@ -4,6 +4,20 @@
 
 **当前版本：v1.26.1** · **平台：Windows 10/11 x64**
 
+<p align="center">
+  <a href="https://github.com/Lucyio02-dev/ookujira-calendar/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Lucyio02-dev/ookujira-calendar?label=release"></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/Lucyio02-dev/ookujira-calendar"></a>
+  <img alt="Windows x64" src="https://img.shields.io/badge/platform-Windows%20x64-0b8f9c">
+</p>
+
+## 效果展示
+
+| 月历与待办 | 桌面伙伴 | おおくじら全身立绘 |
+|:---:|:---:|:---:|
+| ![Ookujira 日历主界面](docs/screenshots/main-calendar.png) | ![おおくじら桌宠](docs/screenshots/companion-panel.png) | ![おおくじら全身立绘](docs/screenshots/fullbody-portrait.png) |
+
+月历里查看日程和课程、在桌面上召唤会陪伴互动的おおくじら，也可以展开查看完整立绘。
+
 ## 下载与安装
 
 从 [GitHub Releases](https://github.com/Lucyio02-dev/ookujira-calendar/releases/latest) 下载 `Ookujira-Calendar-Setup-1.26.1.exe`，双击运行安装程序。安装程序允许选择安装目录，并创建桌面和开始菜单快捷方式。卸载应用不会自动删除个人数据。
