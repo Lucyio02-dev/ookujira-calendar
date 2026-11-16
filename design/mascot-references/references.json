@@ -1,0 +1,67 @@
+{
+  "collectedOn": "2026-10-30",
+  "purpose": "鲸鱼妹日历形象优化的网络参考资料",
+  "timezone": "Asia/Shanghai",
+  "references": [
+    {
+      "url": "https://treapgogo.github.io/deepseek-whale-girl/assets/dafeiyu-chibi-character-sheet.png",
+      "file": "images/01-chibi-sheet.png",
+      "usage": "设计研究参考；图片许可单独核实",
+      "title": "鲸鱼娘 Q 版设定",
+      "modified": false,
+      "sha256": "539548dbdf78a6488b9baca3af07521fe422c62bd8dee6e5664a1880754325b6",
+      "bytes": 2123873,
+      "id": "treap-chibi",
+      "source": "https://treapgogo.github.io/deepseek-whale-girl/index.html"
+    },
+    {
+      "url": "https://treapgogo.github.io/deepseek-whale-girl/assets/dafeiyu-mature-character-sheet.png",
+      "file": "images/02-elegant-sheet.png",
+      "usage": "设计研究参考；图片许可单独核实",
+      "title": "鲸鱼娘成熟比例设定",
+      "modified": false,
+      "sha256": "1debce40cf05ef1b6ee1ec138595036d55667224cb1306e3f4d77de0e2b0b97e",
+      "bytes": 2256676,
+      "id": "treap-elegant",
+      "source": "https://treapgogo.github.io/deepseek-whale-girl/index.html"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/AATINF/deepseek-whale-girl-assets/main/featured/C11.jpg",
+      "file": "images/03-elegant-face.jpg",
+      "usage": "设计研究参考；上游图片许可需核实",
+      "title": "成熟版表情 C11",
+      "modified": false,
+      "sha256": "efef3b2bb33d26bacd291c9c03ba25e16fb6445b3173d8dca68ed73f5dc439dd",
+      "bytes": 212720,
+      "id": "aatinf-face",
+      "source": "https://github.com/AATINF/deepseek-whale-girl-assets"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/AATINF/deepseek-whale-girl-assets/main/featured/C37.jpg",
+      "file": "images/04-palette.jpg",
+      "usage": "设计研究参考；上游图片许可需核实",
+      "title": "配色参考 C37",
+      "modified": false,
+      "sha256": "b8b15bd5eecc02f8c48c81b279be94d20dc28238f2f66c39355776f9427848cb",
+      "bytes": 256986,
+      "id": "aatinf-palette",
+      "source": "https://github.com/AATINF/deepseek-whale-girl-assets"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/YunYueSama/codex-deepseek-pet/main/design/character-sheet.png",
+      "file": "images/05-desktop-character-sheet.png",
+      "usage": "保留作者、仓库与随附自定义许可；第三方参考边界见 ASSET_LICENSE.md",
+      "title": "大肥鱼角色标准与动作",
+      "modified": false,
+      "sha256": "75e75202aa88f2c6a8589b9f2fc244773f18487d7472bfc51d84f96b2ee06425",
+      "bytes": 2166343,
+      "id": "yunyue-character",
+      "source": "https://github.com/YunYueSama/codex-deepseek-pet"
+    }
+  ],
+  "additionalSources": [
+    "https://bao.fish/",
+    "https://github.com/schrieeeffer/shenshen-codex-pet"
+  ],
+  "originalArtworkUnmodified": true
+}

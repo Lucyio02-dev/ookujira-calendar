@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none';">
+  <title>Ookujira 日历</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-fx" aria-hidden="true">
+    <i class="aurora aurora-1"></i>
+    <i class="aurora aurora-2"></i>
+    <i class="aurora aurora-3"></i>
+    <div class="stars" id="stars"></div>
+    <div class="bg-bubbles" id="bgBubbles"></div>
+  </div>
+  <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="m16 3 5 5-3 1-4 5v3l-3-3-7 7 7-7-3-3h3l5-4z"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-left" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></symbol>
+      <symbol id="i-right" viewBox="0 0 24 24"><path d="m10 6 6 6-6 6"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+      <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></symbol>
+      <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="m17 9 5 6M22 9l-5 6"/></symbol>
+      <symbol id="i-whale" viewBox="0 0 24 24"><path d="M3 12c0-3.5 3-6 7.5-6 4 0 7.5 2 8.5 5.5.4 1.4-.2 2.5-1.5 2.5H5.5C4 14 3 13.3 3 12z"/><path d="M19 11.5c1.8-.4 2.8-1.8 2.5-3.5-1.5.5-2.4 1.5-2.5 3zM6.5 9.5h.01M9.5 9.5h.01"/></symbol>
+      <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></symbol>
+      <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.5a2.5 2.5 0 0 0 0-5H12a2 2 0 0 1 0-4h6.5A2.5 2.5 0 0 0 21 9.5C21 5.9 16.9 3 12 3z"/><path d="M7.5 10.5h.01M10 7h.01M14.5 7h.01"/></symbol>
+      <symbol id="i-export" viewBox="0 0 24 24"><path d="M12 15V3m0 0 4 4m-4-4L8 7M4 15v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-3"/></symbol>
+      <symbol id="i-import" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 15v3a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-3"/></symbol>
+    </defs>
+  </svg>
+  <main class="app-container">
+    <header class="title-bar">
+      <div class="brand"><span class="brand-mark"><img src="assets/ookujira.svg" alt="" draggable="false"></span><span>Ookujira 日历</span><span class="brand-dot"></span></div>
+      <div class="window-controls">
+        <button class="icon-btn" id="btnTheme" aria-label="主题外观" title="主题外观"><svg><use href="#i-palette"/></svg></button>
+        <button class="icon-btn" id="btnSound" aria-label="音效" aria-pressed="true" title="音效开关"><svg><use href="#i-sound"/></svg></button>
+        <button class="icon-btn" id="btnPet" aria-label="召唤桌宠おおくじら" aria-pressed="false" title="召唤おおくじら到桌面"><svg><use href="#i-whale"/></svg></button>
+        <button class="icon-btn" id="btnTop" aria-label="窗口置顶" aria-pressed="false" title="窗口置顶"><svg><use href="#i-pin"/></svg></button>
+        <button class="icon-btn" id="btnMinimize" aria-label="最小化" title="最小化"><svg><use href="#i-minus"/></svg></button>
+        <button class="icon-btn close-btn" id="btnClose" aria-label="收进托盘" title="收进托盘 · 提醒继续运行"><svg><use href="#i-close"/></svg></button>
+      </div>
+    </header>
+
+    <section class="today-overview" aria-label="今日概览">
+      <div class="today-date"><span id="todayDay" class="day-number"></span><div><div id="todayMonth" class="date-caption"></div><div class="greeting" id="greeting"></div></div></div>
+      <button class="today-progress" id="todayProgressBox" title="查看本周回顾"><span id="todayCount"></span><progress id="todayProgress" max="1" value="0" aria-label="今日完成进度"></progress></button>
+    </section>
+
+    <button class="weather-strip" id="weatherOpen" title="设置城市与天气联动">天气 · 正在读取…</button>
+
+    <section class="next-course" id="nextCourse" aria-label="下一节课">
+      <span class="next-course-icon">课</span>
+      <div class="next-course-copy"><span id="nextCourseWhen" class="next-course-when">课表还没导入</span><strong id="nextCourseTitle">导入课表后，这里显示下一节课</strong><span id="nextCourseDetails" class="next-course-details">也可以先手动添加一节课</span></div>
+      <button class="next-course-manage" id="btnCourses">课表</button>
+    </section>
+
+    <section class="companion-panel" id="companionPanel" aria-labelledby="companionTitle" hidden>
+      <div class="companion-panel-heading"><span class="companion-kicker">一小片海，一直在这里</span><button class="return-calendar" id="closeCompanion" aria-label="收起おおくじら，返回月历">返回月历 <svg><use href="#i-close"/></svg></button></div>
+      <div class="companion-scene">
+        <div class="companion-portrait" id="companionPortraitBox" title="点击查看全身立绘">
+          <span class="portrait-pose" aria-hidden="true">
+            <img id="companionPortrait" src="assets/mascot-v2/happy.png" alt="蓝色渐变长发、身着蓝白裙装的おおくじら" draggable="false">
+          </span>
+          <button class="portrait-full-btn" id="btnFullBody" title="查看全身立绘"><svg><use href="#i-expand"/></svg>全身</button>
+        </div>
+        <div class="companion-message"><span class="companion-presence"><i></i><span id="companionPresence">在这里陪你</span></span><h2 id="companionTitle">おおくじら</h2><p class="companion-quote" id="companionQuote">你忙你的。<br>这边有我。</p><span class="companion-agenda" id="companionAgenda">今天，自由安排</span></div>
+      </div>
+      <div class="expression-controls" role="group" aria-label="おおくじら表情"><button data-mood="auto" aria-pressed="true">随时间</button><button data-mood="happy" aria-pressed="false">微笑</button><button data-mood="shy" aria-pressed="false">害羞</button><button data-mood="sleep" aria-pressed="false">小憩</button></div>
+    </section>
+
+    <section class="calendar-section" id="calendarSection" aria-label="月历">
+      <div class="cal-header">
+        <div class="cal-title" id="calTitle"><b id="calTitleMonth"></b><span id="calTitleYear"></span></div>
+        <div class="cal-navigation">
+          <button class="today-btn" id="goToday" title="返回今天（Alt + T）">今天</button>
+          <button class="today-btn" id="toggleWeekView" aria-pressed="false" title="查看本周课程">周课表</button>
+          <button class="icon-btn" id="prevMonth" aria-label="上一月"><svg><use href="#i-left"/></svg></button>
+          <button class="icon-btn" id="nextMonth" aria-label="下一月"><svg><use href="#i-right"/></svg></button>
+        </div>
+      </div>
+      <div class="cal-weekdays" id="monthWeekdays" aria-hidden="true"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+      <div class="cal-grid" id="calGrid" role="group" aria-label="选择日期"></div>
+      <div class="week-agenda" id="weekAgenda" hidden aria-label="本周课程"></div>
+      <div class="calendar-caption"><span><i class="legend-dot"></i>未完成</span><span><i class="legend-dot legend-course"></i>有课程</span><span><i class="legend-dot legend-done"></i>全部完成</span><span>双击日期添加待办</span></div>
+    </section>
+
+    <section class="todo-section" aria-labelledby="agendaTitle">
+      <div class="todo-header"><div><h2 id="agendaTitle">我的日程 <span id="todoCount" class="count-badge">0</span></h2><p id="rangeCaption"></p></div><button class="primary-btn add-btn" id="btnAdd" title="新增待办（Ctrl + N）"><svg><use href="#i-plus"/></svg>新增</button></div>
+      <div class="todo-toolbar">
+        <div class="range-tabs" role="group" aria-label="日程范围"><button data-range="day" aria-pressed="false">当天</button><button data-range="upcoming" aria-pressed="true">近四天</button><button data-range="all" aria-pressed="false">全部</button></div>
+        <div class="agenda-filters"><select id="eventFilter" aria-label="筛选课程与待办"><option value="all">全部</option><option value="courses">课程</option><option value="todos">待办</option></select><button class="filter-btn" id="hideDone" aria-pressed="false" title="隐藏已完成事项">隐藏已完成</button></div>
+      </div>
+      <label class="search-box"><svg><use href="#i-search"/></svg><input id="searchInput" type="search" placeholder="搜索标题或备注" aria-label="搜索标题或备注" maxlength="200" autocomplete="off"><kbd>Ctrl K</kbd></label>
+      <div class="todo-list" id="todoList" aria-busy="true"><div class="empty-state"><p>正在打开你的日程…</p></div></div>
+    </section>
+
+    <footer class="companion-footer">
+      <div class="companion-copy"><span class="companion-name">おおくじら陪你 <span>·</span> <span id="companionHint">点头像，来见见我</span></span><div class="footer-row2"><span class="reminder-status" id="reminderStatus"><svg><use href="#i-bell"/></svg>应用开启时提醒 · 最小化后仍有效</span><button class="focus-chip" id="btnFocus" title="专注模式（Alt + F）"><svg><use href="#i-timer"/></svg>专注</button></div></div>
+      <button class="mascot-wrap" id="mascot" aria-label="展开おおくじら" aria-expanded="false" aria-controls="companionPanel" title="点头像，展开おおくじら"><img id="mascotImg" src="assets/mascot-v2/happy.png" alt="おおくじら" draggable="false"></button>
+      <div class="mascot-bubble" id="mascotBubble" role="status"></div>
+    </footer>
+  </main>
+
+  <dialog id="statsDialog" aria-label="本周回顾">
+    <div class="focus-head"><div><span class="eyebrow">每一件完成，都算数</span><h2>本周回顾</h2></div><button type="button" class="icon-btn" id="btnStatsClose" aria-label="关闭本周回顾"><svg><use href="#i-close"/></svg></button></div>
+    <div class="stats-bars" id="statsBars"></div>
+    <p class="stats-summary" id="statsSummary"></p>
+    <div class="stats-actions"><button type="button" class="secondary-btn stats-btn" id="btnExport" title="把全部待办导出为 JSON 备份"><svg><use href="#i-export"/></svg>导出备份</button><button type="button" class="secondary-btn stats-btn" id="btnImport" title="从 JSON 备份导入（替换当前待办）"><svg><use href="#i-import"/></svg>导入备份</button></div>
+    <p class="form-hint">柱子记录每天完成的事项数，主题色是今天。备份包含全部待办与完成记录。</p>
+  </dialog>
+
+  <dialog id="coursesDialog" class="courses-dialog" aria-labelledby="coursesDialogTitle">
+    <div class="focus-head"><div><span class="eyebrow">把一周的时间看清楚</span><h2 id="coursesDialogTitle">我的课表</h2></div><button type="button" class="icon-btn" id="btnCoursesClose" aria-label="关闭课表管理"><svg><use href="#i-close"/></svg></button></div>
+    <div class="course-settings">
+      <label for="courseTermMonday">第一教学周的周一 <span>把“第几周”换算成具体日期</span></label>
+      <div class="course-setting-row"><input type="date" id="courseTermMonday"><label for="courseTermWeeks">学期周数</label><input type="number" id="courseTermWeeks" min="1" max="60" value="20"></div>
+      <label for="coursePeriodTimes">节次对应时间 <span>只导出节次时用于显示和提醒</span></label><textarea class="period-times-input" id="coursePeriodTimes" rows="3" placeholder="1节 08:00-08:45&#10;2节 08:55-09:40"></textarea>
+    </div>
+    <div class="course-manager-actions"><button type="button" class="primary-btn" id="btnImportCourses"><svg><use href="#i-import"/></svg>导入课表文件</button><button type="button" class="secondary-btn" id="btnNewCourse">手动添加</button></div>
+    <p class="form-hint" id="courseSourceHint">支持 Excel、CSV、TSV 和 ICS。更改学期或节次时间后，请重新导入以重新换算日期与提醒。</p>
+    <div class="course-manager-list" id="courseManagerList"></div>
+    <p class="form-hint">首次导入按教务系统的课程名称、日期或星期、周次和节次识别；导入前可在预览中调整列映射。</p>
+  </dialog>
+
+  <dialog id="courseImportDialog" class="course-import-dialog" aria-labelledby="courseImportTitle">
+    <div class="focus-head"><div><span class="eyebrow">先核对识别结果，再写入课表</span><h2 id="courseImportTitle">导入预览</h2></div><button type="button" class="icon-btn" id="btnCourseImportClose" aria-label="取消导入"><svg><use href="#i-close"/></svg></button></div>
+    <p class="course-import-file" id="courseImportFile"></p>
+    <div class="course-settings course-import-term"><label for="courseImportMonday">第一教学周的周一 <span>用于换算课程日期</span></label><div class="course-setting-row"><input type="date" id="courseImportMonday"><label for="courseImportWeeks">学期周数</label><input type="number" id="courseImportWeeks" min="1" max="60" value="20"></div><label for="courseImportPeriodTimes">节次对应时间 <span>只导出节次时用于显示和提醒</span></label><textarea class="period-times-input" id="courseImportPeriodTimes" rows="3" placeholder="1节 08:00-08:45&#10;2节 08:55-09:40"></textarea></div>
+    <div class="course-import-mappings" id="courseImportMappings"></div>
+    <div class="course-import-summary" id="courseImportSummary" role="status"></div>
+    <div class="course-import-preview" id="courseImportPreview"></div>
+    <div class="modal-footer"><button type="button" class="secondary-btn" id="btnCancelCourseImport">取消</button><button type="button" class="primary-btn" id="btnConfirmCourseImport">导入课程</button></div>
+  </dialog>
+
+  <dialog id="courseEditorDialog" class="course-editor-dialog" aria-labelledby="courseEditorTitle">
+    <form id="courseForm">
+      <div class="modal-heading"><div><span class="eyebrow">一次课程的时间与地点</span><h2 id="courseEditorTitle">添加课程</h2></div><button type="button" class="icon-btn" id="btnCourseEditorClose" aria-label="关闭课程编辑"><svg><use href="#i-close"/></svg></button></div>
+      <div class="modal-body">
+        <label for="courseEditTitle">课程名称</label><input type="text" id="courseEditTitle" maxlength="100" required>
+        <div class="form-row"><div><label for="courseEditDate">日期</label><input type="date" id="courseEditDate" min="1900-01-01" max="9999-12-31" required></div><div><label for="courseEditReminder">提前提醒</label><select id="courseEditReminder"><option value="0">不提醒</option><option value="5">5 分钟</option><option value="10">10 分钟</option><option value="20" selected>20 分钟</option><option value="30">30 分钟</option><option value="60">1 小时</option></select></div></div>
+          <div class="form-row course-time-row"><div><label for="courseEditStart">开始时间 <span>没有时段可留空</span></label><input type="time" id="courseEditStart"></div><div><label for="courseEditEnd">结束时间 <span>选填</span></label><input type="time" id="courseEditEnd"></div></div>
+        <label for="courseEditPeriod">节次 <span>选填，例如第 3–4 节</span></label><input type="text" id="courseEditPeriod" maxlength="50">
+        <label for="courseEditLocation">上课地点</label><input type="text" id="courseEditLocation" maxlength="180">
+        <label for="courseEditTeacher">教师 <span>选填</span></label><input type="text" id="courseEditTeacher" maxlength="100">
+        <label for="courseEditNote">备注 <span>选填</span></label><textarea id="courseEditNote" maxlength="240" rows="2"></textarea>
+        <p class="form-error" id="courseFormError" role="alert"></p>
+      </div>
+      <div class="modal-footer"><button type="button" class="danger-btn" id="btnDeleteCourse" hidden>删除本次课</button><button type="button" class="secondary-btn" id="btnRestoreCourseSource" hidden>恢复导入内容</button><button type="button" class="secondary-btn" id="btnCancelCourseEditor">取消</button><button type="submit" class="primary-btn" id="btnSaveCourse">保存课程</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="themeDialog" aria-label="主题外观">
+    <div class="focus-head"><div><span class="eyebrow">换一种海的颜色</span><h2>主题外观</h2></div><button type="button" class="icon-btn" id="btnThemeClose" aria-label="关闭主题外观"><svg><use href="#i-close"/></svg></button></div>
+    <div class="theme-grid" role="group" aria-label="选择主题">
+      <button data-theme="tide" aria-pressed="true"><i class="swatch sw-tide"></i>潮汐<span>青绿 · 默认</span></button>
+      <button data-theme="ocean" aria-pressed="false"><i class="swatch sw-ocean"></i>深海<span>湛蓝</span></button>
+      <button data-theme="sakura" aria-pressed="false"><i class="swatch sw-sakura"></i>暮樱<span>粉紫</span></button>
+      <button data-theme="stardust" aria-pressed="false"><i class="swatch sw-stardust"></i>星芒<span>暖金</span></button>
+    </div>
+    <p class="form-hint">主题只改变界面配色，不影响任何数据。</p>
+  </dialog>
+
+  <dialog id="focusDialog" aria-label="专注模式">
+    <div class="focus-head"><div><span class="eyebrow">一段时间，只做一件事</span><h2>专注模式</h2></div><button type="button" class="icon-btn" id="btnFocusClose" aria-label="关闭专注模式"><svg><use href="#i-close"/></svg></button></div>
+    <div class="focus-stage">
+      <svg class="focus-ring-svg" viewBox="0 0 128 128" aria-hidden="true">
+        <circle class="focus-track" cx="64" cy="64" r="54"/>
+        <circle class="focus-ring" id="focusRing" cx="64" cy="64" r="54"/>
+      </svg>
+      <div class="focus-readout"><span id="focusTime">25:00</span><span id="focusStatus">选一段时长，随时启航</span></div>
+    </div>
+    <div class="focus-controls" role="group" aria-label="专注时长">
+      <button data-focus-min="25" aria-pressed="true">25 分钟</button>
+      <button data-focus-min="45" aria-pressed="false">45 分钟</button>
+      <button data-focus-min="15" aria-pressed="false">15 分钟</button>
+    </div>
+    <div class="focus-actions"><button type="button" class="primary-btn" id="focusToggle">开始专注</button><button type="button" class="secondary-btn" id="focusReset">重置</button></div>
+    <p class="form-hint">专注结束时おおくじら会提醒你。窗内的进度不会打扰你。</p>
+  </dialog>
+
+  <dialog id="fullBody" aria-label="おおくじら全身立绘">
+    <div class="fullbody-stage"><img id="fullBodyImg" src="assets/mascot-v2/happy.png" alt="おおくじら全身立绘" draggable="false"><div class="fullbody-glow" aria-hidden="true"></div></div>
+    <button class="icon-btn fullbody-close" id="btnFullBodyClose" aria-label="关闭全身立绘"><svg><use href="#i-close"/></svg></button>
+    <p class="fullbody-caption">尾巴也在。看完记得回去忙。</p>
+  </dialog>
+
+  <dialog id="modal" aria-labelledby="modalTitle">
+    <form id="todoForm">
+      <div class="modal-heading"><div><span class="eyebrow">留一点时间给重要的事</span><h2 id="modalTitle">新增待办</h2></div><button type="button" class="icon-btn" id="btnCancel" aria-label="关闭编辑"><svg><use href="#i-close"/></svg></button></div>
+      <div class="modal-body">
+        <label for="editTitle">事项标题 <span>必填 · 可写「明天晚上8点」自动识别</span></label><input type="text" id="editTitle" placeholder="例如：明天晚上8点 和导师开会" maxlength="50" required autocomplete="off">
+        <p class="quick-chip" id="quickChip" role="status" hidden></p>
+        <div class="form-row"><div><label for="editDate">日期</label><input type="date" id="editDate" min="1900-01-01" max="9999-12-31" required></div><div><label for="editTime">提醒时间</label><input type="time" id="editTime" step="60" required></div></div>
+        <label for="editNote">备注 <span>选填</span></label><textarea id="editNote" placeholder="补充地点、计划，或给自己一句鼓励…" maxlength="200" rows="3"></textarea>
+        <p class="form-hint" id="scheduleHint">おおくじら会在约定的时间提醒你。</p>
+        <p class="form-error" id="formError" role="alert"></p>
+      </div>
+      <div class="modal-footer"><button type="button" class="danger-btn" id="btnDelete" hidden><svg><use href="#i-trash"/></svg>删除</button><button type="button" class="secondary-btn" id="btnCancelBottom">取消</button><button type="submit" class="primary-btn" id="btnSave">保存待办</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" hidden><span id="toastText"></span><button id="toastAction" hidden>撤销</button><button class="toast-dismiss" id="toastDismiss" aria-label="关闭提示">×</button></div>
+  <div class="cal-tip" id="calTip" role="tooltip" aria-hidden="true" hidden></div>
+  <div class="drag-tip" id="dragTip" aria-hidden="true" hidden></div>
+  <div class="fx-layer" id="fxLayer" aria-hidden="true"></div>
+  <dialog id="weatherDialog" aria-labelledby="weatherHeading">
+    <div class="modal-header"><h2 id="weatherHeading">天气与陪伴</h2><button id="weatherClose" class="icon-btn" aria-label="关闭">×</button></div>
+    <div class="weather-settings"><label><input id="weatherEnabled" type="checkbox"> 随当地天气切换动作</label><p id="weatherDetail"></p><form id="weatherSearchForm"><label for="weatherCity">城市名称</label><div class="weather-search"><input id="weatherCity" placeholder="武汉 / Beijing" maxlength="80" required minlength="2"><button class="primary-btn">搜索</button></div></form><div id="weatherResults"></div><p id="weatherMessage" role="status"></p><button class="secondary-btn" id="weatherRefresh">刷新天气</button><p class="weather-credit">当前天气来自 <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a> · 天气模型估计，非逐秒实况。城市坐标用于请求天气，每20分钟更新；超过90分钟停止联动。</p></div>
+  </dialog>
+  <script src="calendar-core.js"></script>
+  <script src="course-core.js"></script>
+  <script src="companion-core.js"></script>
+  <script src="weather-ui.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

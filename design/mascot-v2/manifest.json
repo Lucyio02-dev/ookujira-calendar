@@ -1,0 +1,54 @@
+{
+  "createdOn": "2026-10-30",
+  "tool": "built-in imagegen",
+  "presentation": "CSS avatar crop, expandable upper-body portrait, and full-body motion atlases",
+  "referenceSource": "https://github.com/TreapGoGo/deepseek-whale-girl",
+  "reference": "design/mascot-references/images/02-elegant-sheet.png",
+  "promptFile": "design/mascot-v2/prompts.md",
+  "oldAssetsPreserved": true,
+  "variants": [
+    {
+      "expression": "happy",
+      "width": 1024,
+      "transparent": true,
+      "bytes": 2016613,
+      "generatedSource": "exec-7f264187-4d38-4bdd-89fd-9ff5be0ccf0c.png",
+      "height": 1536,
+      "sha256": "5bfed582fe0c2961f42538709f9c619de440b4dd0d1f16d8e066a20f41d613a7",
+      "file": "assets/mascot-v2/happy.png"
+    },
+    {
+      "expression": "shy",
+      "width": 1024,
+      "transparent": true,
+      "bytes": 1986548,
+      "generatedSource": "exec-7378e228-6276-4c15-bc57-bed26d5dbe16.png",
+      "height": 1536,
+      "sha256": "b8f5bee9431d9a36eb65b5096f1f8a4d75049a9325cdde4e744082b671e0417c",
+      "file": "assets/mascot-v2/shy.png"
+    },
+    {
+      "expression": "sleep",
+      "width": 1024,
+      "transparent": true,
+      "bytes": 1983878,
+      "generatedSource": "exec-ac8fdfce-b072-4e73-8325-88c8dd4fb461.png",
+      "height": 1536,
+      "sha256": "42801f0f7cd84a3f7d01e42de2d7ab18d5d29d3f3212e35e25b6a0c7e202c17d",
+      "file": "assets/mascot-v2/sleep.png"
+    }
+  ],
+  "animation": {
+    "promptFile": "design/mascot-v2/animation-prompts.md",
+    "idle": { "file": "assets/mascot-v2/animation/idle-atlas.png", "generatedSource": "exec-27b7fc40-c89a-4d37-9800-ac8f33179d1d.png", "width": 1024, "height": 1536, "frames": 4, "layout": "2 columns x 2 rows", "bytes": 2355032, "sha256": "0f2786ba7f6ff1f79f817799eb0ae00523f699f4bacc219b690427177774eab4" },
+    "walk": { "file": "assets/mascot-v2/animation/walk-atlas.png", "generatedSource": "exec-7c21056d-6058-488d-a3af-ef17e2f249de.png", "width": 1774, "height": 887, "frames": 8, "layout": "4 columns x 2 rows", "bytes": 1424176, "sha256": "13d97d9fa9fa87bc00a5e22df56f9873437ff102f81c23c4fa4874266d00897d" },
+    "turn": { "file": "assets/mascot-v2/animation/turn-atlas.png", "generatedSource": "exec-09785243-f356-403a-8f01-d2fd7b82476a.png", "width": 1024, "height": 1536, "frames": 4, "layout": "2 columns x 2 rows", "bytes": 2260606, "sha256": "8363ed02e29655b67794461ff7dee16d30786c327fc099576deec79f4ddf3025" },
+    "sideWalk": { "file": "assets/mascot-v2/animation/walk-side-atlas.png", "generatedSource": "exec-aab4e03c-fee8-45b4-a4f5-20625ce691f2.png", "width": 1774, "height": 887, "frames": 8, "layout": "4 columns x 2 rows", "bytes": 1315158, "sha256": "804669a804e432fa35de646010d37b179a0fe523f77d62eef6481098c02088a2" },
+    "greeting": { "file": "assets/mascot-v2/animation/greeting-atlas.png", "generatedSource": "exec-60ef396e-052c-42f7-a1dd-453fe3b5cf3c.png", "width": 1024, "height": 1536, "frames": 4, "layout": "2 columns x 2 rows", "bytes": 2272912, "sha256": "3409519191f3a18023ffa5a737952f804f5adea1ac24effc21c59d6fdfdcc8ed" },
+    "stretch": { "file": "assets/mascot-v2/animation/stretch-atlas.png", "generatedSource": "exec-add6471a-f37e-45f4-a35e-5221c2b0c429.png", "width": 1024, "height": 1536, "frames": 4, "layout": "2 columns x 2 rows", "bytes": 2346648, "sha256": "1800471b93ec0f69ebb936566627dcc58a4b7b1ddd5e5501ffa6d033082adbaf" },
+    "sit": { "file": "assets/mascot-v2/animation/sit-atlas.png", "generatedSource": "exec-6e4d0f54-f87c-4bed-9189-9ba4be908f0f.png", "width": 1024, "height": 1536, "frames": 4, "layout": "2 columns x 2 rows", "bytes": 2444009, "sha256": "4fdc8ba9057f5fafc7d7372c3e303fe0c76aaed4a9627fd151e2454d39e33e79" },
+    "hop": { "file": "assets/mascot-v2/animation/hop-atlas.png", "generatedSource": "exec-59f76c81-b632-45b5-a114-87d58227d9d5.png", "width": 1024, "height": 1536, "frames": 4, "layout": "2 columns x 2 rows", "bytes": 2456233, "sha256": "b9c6d41ef33adbe8bf5bb37511cd91acfb3c3ccbe671871acf925cfeca4158cf" },
+    "sleep": { "file": "assets/mascot-v2/animation/sleep-atlas.png", "generatedSource": "exec-d8707f99-7496-4855-bc1c-3abb36111f34.png", "width": 1024, "height": 1536, "frames": 4, "layout": "2 columns x 2 rows", "bytes": 2332033, "sha256": "66d434a883e5045e66e016ae24d26043911403b6718f15678bc6297404aaeca2" },
+    "drag": { "file": "assets/mascot-v2/animation/drag-atlas.png", "generatedSource": "exec-7e633ad1-7025-4487-845c-e544e1464014.png", "width": 1024, "height": 1536, "frames": 4, "layout": "2 columns x 2 rows", "bytes": 2509723, "sha256": "a091bb51c2f1e23d6ccfb9cf0476d0d075259f1054132679b3e6e88af536c908" }
+  }
+}

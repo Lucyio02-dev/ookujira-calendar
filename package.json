@@ -1,0 +1,77 @@
+{
+  "name": "desktop-calendar-reminder",
+  "version": "1.26.1",
+  "description": "桌面小窗口日历与待办提醒工具",
+  "productName": "Ookujira 日历",
+  "author": "Lucyio02-dev",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win nsis",
+    "dist:win": "electron-builder --win nsis --publish never",
+    "test": "node --test tests/core.test.cjs tests/store.test.cjs tests/companion.test.cjs tests/pet-motion.test.cjs",
+    "test:ui": "node tests/run-ui.cjs",
+    "test:pet": "node tests/run-pet.cjs",
+    "shots": "node tests/run-lab.cjs",
+    "test:companion": "node tests/run-companion.cjs",
+    "build:icon": "electron tests/build-icon.cjs"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lucyio02-dev/ookujira-calendar.git"
+  },
+  "build": {
+    "appId": "io.github.lucyio02dev.ookujiracalendar",
+    "productName": "Ookujira 日历",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "index.html",
+      "styles.css",
+      "calendar-core.js",
+      "todo-store.js",
+      "course-core.js",
+      "course-import.js",
+      "course-store.js",
+      "companion-core.js",
+      "weather-service.js",
+      "weather-ui.js",
+      "pet.html",
+      "pet.css",
+      "pet-renderer.js",
+      "pet-preload.js",
+      "pet-motion-core.js",
+      "assets/**/*",
+      "package.json"
+    ],
+    "artifactName": "Ookujira-Calendar-Setup-${version}.${ext}",
+    "win": {
+      "icon": "assets/ookujira.ico",
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Ookujira 日历",
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.3.3",
+    "electron-builder": "^26.18.1"
+  },
+  "dependencies": {
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}

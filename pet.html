@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none';">
+  <title>おおくじら</title>
+  <link rel="stylesheet" href="pet.css">
+</head>
+<body>
+  <div class="pet-bubble" id="petBubble" role="status"></div>
+  <div class="pet-stage" id="petStage">
+    <div class="pet-figure" id="petFigure">
+      <img id="petBody" src="assets/mascot-v2/happy.png" alt="おおくじら" draggable="false">
+      <span class="pet-face-fx" aria-hidden="true"><img id="petFace" src="assets/mascot-v2/happy.png" alt="" draggable="false"></span>
+      <span class="pet-sprite" id="petSprite" data-mode="idle" aria-hidden="true">
+        <img id="petLifeAtlas" src="assets/mascot-v2/animation/life-atlas.png" alt="" draggable="false">
+        <img id="petWalkAtlas" src="assets/mascot-v2/animation/walk-atlas.png" alt="" draggable="false">
+        <img id="petWalkSideAtlas" src="assets/mascot-v2/animation/walk-side-atlas.png" alt="" draggable="false">
+        <img id="petTurnAtlas" src="assets/mascot-v2/animation/turn-atlas.png" alt="" draggable="false">
+        <img id="petIdleAtlas" src="assets/mascot-v2/animation/idle-atlas.png" alt="" draggable="false">
+        <img id="petGreetingAtlas" src="assets/mascot-v2/animation/greeting-atlas.png" alt="" draggable="false">
+        <img id="petStretchAtlas" src="assets/mascot-v2/animation/stretch-atlas.png" alt="" draggable="false">
+        <img id="petSitAtlas" src="assets/mascot-v2/animation/sit-atlas.png" alt="" draggable="false">
+        <img id="petHopAtlas" src="assets/mascot-v2/animation/hop-atlas.png" alt="" draggable="false">
+        <img id="petSleepAtlas" src="assets/mascot-v2/animation/sleep-atlas.png" alt="" draggable="false">
+        <img id="petDragAtlas" src="assets/mascot-v2/animation/drag-atlas.png" alt="" draggable="false">
+      </span>
+    </div>
+  </div>
+  <script src="companion-core.js"></script>
+  <script src="pet-renderer.js"></script>
+</body>
+</html>
